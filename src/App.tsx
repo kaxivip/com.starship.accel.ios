@@ -83,7 +83,7 @@ const RocketGauge=({state,size=220}:{state:'idle'|'connecting'|'connected';size?
         {/* Body - metallic bullet silhouette (LOGO shape) */}
         <path d="M120 44 Q100 64 100 108 L100 156 Q100 170 111 174 L129 174 Q140 170 140 156 L140 108 Q140 64 120 44 Z" fill="url(#bodyG)"/>
         {/* Left side shine along inner edge */}
-        <path d="M108 56 Q102 76 102 108 L102 152 Q103 166 111 171" fill="none" stroke="url(#bodyShine)" strokeWidth="5" strokeLinecap="round"/>
+        <path d="M110 70 Q104 88 104 110 L104 150 Q105 164 112 169" fill="none" stroke="url(#bodyShine)" strokeWidth="4" strokeLinecap="butt"/>
         {/* Subtle silhouette outline */}
         <path d="M120 44 Q100 64 100 108 L100 156 Q100 170 111 174 L129 174 Q140 170 140 156 L140 108 Q140 64 120 44 Z" fill="none" stroke="#1E293B" strokeWidth="1" opacity=".5"/>
         {/* Nose tip highlight */}
