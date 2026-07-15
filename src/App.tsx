@@ -74,44 +74,35 @@ const RocketGauge=({state,size=220}:{state:'idle'|'connecting'|'connected';size?
       {/* Rocket group */}
       <g style={{transform:launch?'translateY(-24px)':'translateY(0)',transition:'transform .8s cubic-bezier(.34,1.56,.64,1)'}}>
       <g style={{animation:'rocketFloat 3s ease-in-out infinite'}}>
-        {/* Fins with gradient */}
-        <path d="M92 152 L78 178 L96 165 Z" fill="url(#finG)"/>
-        <path d="M148 152 L162 178 L144 165 Z" fill="url(#finGR)"/>
-        <path d="M92 152 L78 178 L96 165 Z" fill="none" stroke="#F5A623" strokeWidth="1" opacity=".3"/>
-        <path d="M148 152 L162 178 L144 165 Z" fill="none" stroke="#F5A623" strokeWidth="1" opacity=".3"/>
-        {/* Main body with metallic gradient */}
-        <rect x="98" y="88" width="44" height="78" rx="5" fill="url(#bodyG)"/>
-        {/* Left side shine */}
-        <rect x="100" y="92" width="8" height="70" rx="3" fill="url(#bodyShine)"/>
-        {/* Nose cone */}
-        <path d="M98 92 Q120 40 142 92 Z" fill="url(#noseG)"/>
-        <path d="M100 92 Q120 50 118 90" fill="none" stroke="#FFFFFF" strokeWidth="1.5" opacity=".5"/>
+        {/* Fins (mint triangular, LOGO style) */}
+        <path d="M100 148 L82 178 L100 170 Z" fill="#5FEBD9" stroke="#F1F5F9" strokeWidth="1.5" strokeLinejoin="round"/>
+        <path d="M140 148 L158 178 L140 170 Z" fill="#5FEBD9" stroke="#F1F5F9" strokeWidth="1.5" strokeLinejoin="round"/>
+        {/* Rocket body - two-tone bullet shape */}
+        {/* Left half - white */}
+        <path d="M120 44 Q100 64 100 108 L100 156 Q100 170 111 174 L120 174 Z" fill="#F1F5F9"/>
+        {/* Right half - mint cyan */}
+        <path d="M120 44 Q140 64 140 108 L140 156 Q140 170 129 174 L120 174 Z" fill="#5FEBD9"/>
+        {/* Body outline */}
+        <path d="M120 44 Q100 64 100 108 L100 156 Q100 170 111 174 L129 174 Q140 170 140 156 L140 108 Q140 64 120 44 Z" fill="none" stroke="#F1F5F9" strokeWidth="1.8" strokeLinejoin="round"/>
+        {/* Center split line */}
+        <line x1="120" y1="50" x2="120" y2="172" stroke="#F1F5F9" strokeWidth="1" opacity=".55"/>
+        {/* Bottom nozzle cone */}
+        <path d="M112 174 L120 190 L128 174 Z" fill="#5FEBD9" stroke="#F1F5F9" strokeWidth="1.5" strokeLinejoin="round"/>
         {/* Nose tip highlight */}
-        <circle cx="120" cy="46" r="2" fill="#FFFFFF" opacity=".8"/>
-        {/* Porthole with glow */}
-        <circle cx="120" cy="114" r="11" fill="#0a1628" stroke="#475569" strokeWidth="2"/>
-        <circle cx="120" cy="114" r="9" fill="url(#portG)" opacity={state==='idle'?.6:1}/>
-        <circle cx="117" cy="111" r="2.5" fill="#FFFFFF" opacity=".7"/>
-        <circle cx="123" cy="117" r="1" fill={C.cyan}/>
-        {/* Body decorative stripes */}
-        <rect x="98" y="140" width="44" height="1.5" fill={C.cyan} opacity=".6"/>
-        <rect x="98" y="146" width="44" height="3" fill="#F5A623" opacity=".3"/>
-        <rect x="98" y="151" width="44" height="1" fill={C.red} opacity=".4"/>
-        {/* Body rivets */}
-        {[97,113,129,145].map((y,i)=><g key={i}><circle cx="102" cy={y} r="1" fill="#334155"/><circle cx="138" cy={y} r="1" fill="#334155"/></g>)}
-        {/* STARSHIP text on body */}
-        <text x="120" y="133" textAnchor="middle" fontSize="5" fill="#334155" fontWeight="700" letterSpacing=".5">STARSHIP</text>
-        {/* Bottom engine ring */}
-        <ellipse cx="120" cy="166" rx="22" ry="4" fill="#1E293B"/>
-        <ellipse cx="120" cy="165" rx="20" ry="3" fill="#0F172A"/>
+        <circle cx="120" cy="48" r="1.8" fill="#FFFFFF" opacity=".9"/>
+        {/* Porthole with cyan glow */}
+        <circle cx="120" cy="108" r="11" fill="#0a1628" stroke="#F1F5F9" strokeWidth="1.8"/>
+        <circle cx="120" cy="108" r="8" fill="url(#portG)" opacity={state==='idle'?.65:1}/>
+        <circle cx="117" cy="105" r="2" fill="#FFFFFF" opacity=".85"/>
+        <circle cx="122" cy="110" r=".8" fill={C.cyan}/>
         {/* Flame */}
-        {showFlame&&<g style={{animation:'flameFlicker .3s ease-in-out infinite',transformOrigin:'120px 168px'}}>
-          <ellipse cx="120" cy="200" rx="20" ry="32" fill="url(#flame1)" opacity=".7"/>
-          <ellipse cx="120" cy="195" rx="13" ry="24" fill="url(#flame1)" opacity=".9"/>
-          <ellipse cx="120" cy="188" rx="7" ry="16" fill="url(#flame2)"/>
-          <ellipse cx="120" cy="180" rx="3" ry="8" fill="#FFFFFF" opacity=".9"/>
+        {showFlame&&<g style={{animation:'flameFlicker .3s ease-in-out infinite',transformOrigin:'120px 190px'}}>
+          <ellipse cx="120" cy="216" rx="18" ry="30" fill="url(#flame1)" opacity=".7"/>
+          <ellipse cx="120" cy="210" rx="11" ry="22" fill="url(#flame1)" opacity=".9"/>
+          <ellipse cx="120" cy="202" rx="6" ry="15" fill="url(#flame2)"/>
+          <ellipse cx="120" cy="195" rx="3" ry="7" fill="#FFFFFF" opacity=".9"/>
           {/* Spark particles */}
-          {[0,1,2,3,4].map(i=><circle key={i} cx={110+i*5} cy={210+((i*7)%10)} r=".8" fill="#FDE68A" opacity=".8" style={{animation:`sparkFall ${.6+i*.15}s linear infinite ${i*.1}s`}}/>)}
+          {[0,1,2,3,4].map(i=><circle key={i} cx={110+i*5} cy={224+((i*7)%10)} r=".8" fill="#FDE68A" opacity=".8" style={{animation:`sparkFall ${.6+i*.15}s linear infinite ${i*.1}s`}}/>)}
         </g>}
         {/* Speed lines when connected */}
         {state==='connected'&&[0,1,2,3].map(i=><g key={i}>
