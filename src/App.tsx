@@ -273,7 +273,7 @@ export default function App(){
     return <div style={{width:'100%',height:'100%',background:C.bg,position:'relative',animation:'fadeIn .3s',overflow:'hidden'}}>
     <Stars n={30}/><StatusBar/>
     <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'10px 22px'}}>
-      <div style={{display:'flex',alignItems:'center',gap:6}}><BrandLogo size={22}/><span style={{fontSize:16,fontWeight:800,background:`linear-gradient(135deg,${C.cyan},${C.purple})`,WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text',letterSpacing:1.5,paddingRight:4,display:'inline-block',lineHeight:1.3}}>星舟加速器</span></div>
+      <div style={{fontSize:16,fontWeight:800,background:`linear-gradient(135deg,${C.cyan},${C.purple})`,WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text',letterSpacing:1.5,paddingRight:4,display:'inline-block',lineHeight:1.3}}>星舟加速器</div>
       <div onClick={()=>{if(navigator.share)navigator.share({title:'星舟加速器',text:'星际穿梭·极速畅游',url:'https://apps.apple.com'}).catch(()=>{})}} style={{width:32,height:32,borderRadius:'50%',background:'rgba(255,255,255,.06)',display:'flex',alignItems:'center',justifyContent:'center',cursor:'pointer'}}>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={C.gray} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
       </div>

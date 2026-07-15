@@ -14,7 +14,7 @@ public class ImgProc {
             var bgColor = bmp.GetPixel(5, 5);
             using (var g = Graphics.FromImage(bmp)) {
                 using (var brush = new SolidBrush(bgColor)) {
-                    // Cover watermark bottom-right area
+                    // Cover watermark bottom-right area (no-op if no watermark)
                     g.FillRectangle(brush, (int)(w*0.76), (int)(h*0.92), (int)(w*0.24), (int)(h*0.08));
                 }
             }
@@ -25,10 +25,10 @@ public class ImgProc {
             for (int i = 0; i < bytes.Length; i += 4) {
                 int b = bytes[i], gg = bytes[i+1], r = bytes[i+2];
                 int diff = Math.Abs(r - bgR) + Math.Abs(gg - bgG) + Math.Abs(b - bgB);
-                if (diff < 45) {
+                if (diff < 60) {
                     bytes[i+3] = 0;
-                } else if (diff < 100) {
-                    bytes[i+3] = (byte)((diff - 45) * 255 / 55);
+                } else if (diff < 130) {
+                    bytes[i+3] = (byte)((diff - 60) * 255 / 70);
                 }
             }
             Marshal.Copy(bytes, 0, data.Scan0, bytes.Length);
