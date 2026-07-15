@@ -134,7 +134,7 @@ function describeArc(cx:number,cy:number,r:number,startAngle:number,endAngle:num
 const Ico=({d,s=20,c=C.gray}:{d:string;s?:number;c?:string})=><svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={d}/></svg>;
 
 const BrandLogo=({size=64,glow=false}:{size?:number;glow?:boolean})=>(
-  <img src="/logo.png" alt="星舟加速器" width={size} height={size} style={{width:size,height:size,objectFit:'contain',display:'block',filter:glow?'drop-shadow(0 0 14px rgba(0,200,255,.45)) drop-shadow(0 0 24px rgba(108,92,231,.3))':undefined,mixBlendMode:'screen'}}/>
+  <img src="/logo.png" alt="星舟加速器" width={size} height={size} style={{width:size,height:size,objectFit:'contain',display:'block',filter:glow?'drop-shadow(0 0 12px rgba(0,200,255,.4)) drop-shadow(0 0 22px rgba(108,92,231,.28))':undefined}}/>
 );
 const IC={
   bolt:'M13 2L3 14h9l-1 10 10-12h-9l1-10z',
