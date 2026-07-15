@@ -132,6 +132,40 @@ function describeArc(cx:number,cy:number,r:number,startAngle:number,endAngle:num
 }
 
 const Ico=({d,s=20,c=C.gray}:{d:string;s?:number;c?:string})=><svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={d}/></svg>;
+
+const BrandLogo=({size=64,glow=false}:{size?:number;glow?:boolean})=>{
+  const uid=`bl${size}`;
+  return <svg width={size} height={size} viewBox="0 0 100 100" style={glow?{filter:`drop-shadow(0 0 12px rgba(0,200,255,.35)) drop-shadow(0 0 20px rgba(108,92,231,.25))`}:undefined}>
+    <defs>
+      <linearGradient id={`${uid}a`} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stopColor="#1e2540"/>
+        <stop offset="1" stopColor="#0a1024"/>
+      </linearGradient>
+      <linearGradient id={`${uid}o`} x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stopColor="#6C5CE7"/>
+        <stop offset=".5" stopColor="#8B7EF0"/>
+        <stop offset="1" stopColor="#00C8FF"/>
+      </linearGradient>
+      <linearGradient id={`${uid}r`} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor="#F1F5F9"/>
+        <stop offset=".6" stopColor="#CBD5E1"/>
+        <stop offset="1" stopColor="#64748B"/>
+      </linearGradient>
+      <linearGradient id={`${uid}f`} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor="#F5A623"/>
+        <stop offset="1" stopColor="#EF4444" stopOpacity="0"/>
+      </linearGradient>
+    </defs>
+    <path d="M50 8 L14 92 L27 92 L35 72 L65 72 L73 92 L86 92 Z M40 62 L50 38 L60 62 Z" fill={`url(#${uid}a)`} fillRule="evenodd"/>
+    <ellipse cx="50" cy="54" rx="46" ry="13" fill="none" stroke={`url(#${uid}o)`} strokeWidth="4" strokeLinecap="round" transform="rotate(-16 50 54)" opacity=".95"/>
+    <path d="M50 28 L44 50 L44 66 L56 66 L56 50 Z" fill={`url(#${uid}r)`}/>
+    <circle cx="50" cy="46" r="3.4" fill="#0a1024"/>
+    <circle cx="50" cy="46" r="3.4" fill="none" stroke="#00C8FF" strokeWidth=".8" opacity=".6"/>
+    <path d="M44 60 L36 70 L44 66 Z" fill="#6C5CE7"/>
+    <path d="M56 60 L64 70 L56 66 Z" fill="#6C5CE7"/>
+    <path d="M46 66 L50 78 L54 66 Z" fill={`url(#${uid}f)`}/>
+  </svg>;
+};
 const IC={
   bolt:'M13 2L3 14h9l-1 10 10-12h-9l1-10z',
   crown:'M2 17l3-9 5 4 2-8 2 8 5-4 3 9H2z',
@@ -226,8 +260,8 @@ export default function App(){
   case 'splash': return <div style={{width:'100%',height:'100%',background:'linear-gradient(180deg,#050a14 0%,#080c18 40%,#0d1528 70%,#080c18 100%)',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',position:'relative',animation:'fadeIn 1s'}}>
     <Stars n={50}/>
     <div style={{animation:'slideUp 1.2s ease-out',display:'flex',flexDirection:'column',alignItems:'center'}}>
-      <div style={{animation:'rocketFloat 3s ease-in-out infinite'}}><RocketGauge state="idle" size={180}/></div>
-      <div style={{marginTop:16,fontSize:26,fontWeight:800,background:'linear-gradient(135deg,#00C8FF,#6C5CE7)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text',letterSpacing:2,paddingRight:6,paddingLeft:2,display:'inline-block',lineHeight:1.3,textAlign:'center'}}>星舟加速器</div>
+      <div style={{animation:'rocketFloat 3s ease-in-out infinite'}}><BrandLogo size={150} glow/></div>
+      <div style={{marginTop:18,fontSize:26,fontWeight:800,background:'linear-gradient(135deg,#00C8FF,#6C5CE7)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text',letterSpacing:2,paddingRight:6,paddingLeft:2,display:'inline-block',lineHeight:1.3,textAlign:'center'}}>星舟加速器</div>
       <div style={{marginTop:10,fontSize:12,color:C.gray,letterSpacing:3,paddingRight:5,fontWeight:300,textAlign:'center'}}>星际穿梭 · 极速畅游</div>
       <div style={{display:'flex',gap:8,marginTop:24}}>{['装机必备','出国必装','海外常备'].map((t,i)=><div key={i} style={{fontSize:10,color:C.grayL,padding:'4px 10px',borderRadius:10,background:'rgba(0,200,255,0.06)',border:`0.5px solid rgba(0,200,255,0.15)`}}>{t}</div>)}</div>
       <div style={{marginTop:32,width:32,height:2,borderRadius:1,background:C.grayD,overflow:'hidden'}}><div style={{width:'100%',height:'100%',background:`linear-gradient(90deg,transparent,${C.cyan},transparent)`,backgroundSize:'200% 100%',animation:'shimmer 1.5s linear infinite'}}/></div>
@@ -237,9 +271,7 @@ export default function App(){
   case 'privacy': return <div style={{width:'100%',height:'100%',background:C.bg,position:'relative',animation:'fadeIn .4s'}}>
     <Stars n={20}/><div style={{position:'absolute',inset:0,background:'rgba(0,0,0,0.55)',backdropFilter:'blur(8px)'}}/>
     <div style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)',width:300,background:'#141c2e',borderRadius:20,padding:'28px 24px',border:`0.5px solid rgba(0,200,255,0.2)`,boxShadow:'0 20px 60px rgba(0,0,0,.5)',animation:'slideUp .4s ease-out'}}>
-      <div style={{display:'flex',justifyContent:'center',marginBottom:16}}><div style={{width:44,height:44,borderRadius:12,background:'linear-gradient(135deg,rgba(0,200,255,.12),rgba(108,92,231,.12))',display:'flex',alignItems:'center',justifyContent:'center'}}>
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={C.cyan} strokeWidth="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-      </div></div>
+      <div style={{display:'flex',justifyContent:'center',marginBottom:14}}><BrandLogo size={54} glow/></div>
       <div style={{fontSize:16,fontWeight:700,color:C.white,textAlign:'center',marginBottom:4}}>隐私政策与服务协议</div>
       <div style={{fontSize:11,color:C.gray,textAlign:'center',marginBottom:16}}>请阅读并同意以下条款</div>
       <div style={{position:'relative',marginBottom:20}}>
@@ -271,7 +303,7 @@ export default function App(){
     return <div style={{width:'100%',height:'100%',background:C.bg,position:'relative',animation:'fadeIn .3s',overflow:'hidden'}}>
     <Stars n={30}/><StatusBar/>
     <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'10px 22px'}}>
-      <div style={{fontSize:16,fontWeight:800,background:`linear-gradient(135deg,${C.cyan},${C.purple})`,WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text',letterSpacing:1.5,paddingRight:4,display:'inline-block',lineHeight:1.3}}>星舟加速器</div>
+      <div style={{display:'flex',alignItems:'center',gap:6}}><BrandLogo size={22}/><span style={{fontSize:16,fontWeight:800,background:`linear-gradient(135deg,${C.cyan},${C.purple})`,WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text',letterSpacing:1.5,paddingRight:4,display:'inline-block',lineHeight:1.3}}>星舟加速器</span></div>
       <div onClick={()=>{if(navigator.share)navigator.share({title:'星舟加速器',text:'星际穿梭·极速畅游',url:'https://apps.apple.com'}).catch(()=>{})}} style={{width:32,height:32,borderRadius:'50%',background:'rgba(255,255,255,.06)',display:'flex',alignItems:'center',justifyContent:'center',cursor:'pointer'}}>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={C.gray} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
       </div>
@@ -438,7 +470,7 @@ export default function App(){
     <Stars n={20}/><StatusBar/>
     <div style={{padding:'8px 16px',position:'relative',zIndex:5}}><ChevL to="home"/></div>
     <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:18,marginTop:36}}>
-      <div style={{width:64,height:64,borderRadius:18,background:'linear-gradient(135deg,rgba(0,200,255,.15),rgba(108,92,231,.15))',display:'flex',alignItems:'center',justifyContent:'center',boxShadow:`0 0 24px rgba(0,200,255,.2)`}}><Ico d={IC.bolt} s={34} c={C.cyan}/></div>
+      <BrandLogo size={64} glow/>
       <div style={{fontSize:20,fontWeight:700,color:C.white,marginTop:6}}>欢迎来到星舟</div>
       <div style={{fontSize:12,color:C.gray}}>登录后享受更多加速权益</div>
     </div>
@@ -556,8 +588,8 @@ export default function App(){
     <StatusBar/>
     <div style={{display:'flex',alignItems:'center',gap:12,padding:'8px 14px'}}><ChevL to="settings"/><span style={{fontSize:17,fontWeight:700,color:C.white}}>关于我们</span></div>
     <div style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:'0 30px'}}>
-      <div style={{animation:'rocketFloat 3s ease-in-out infinite',marginBottom:20}}><RocketGauge state="idle" size={140}/></div>
-      <div style={{fontSize:22,fontWeight:800,color:C.white,letterSpacing:3}}>星舟加速器</div>
+      <div style={{animation:'rocketFloat 3s ease-in-out infinite',marginBottom:20}}><BrandLogo size={130} glow/></div>
+      <div style={{fontSize:22,fontWeight:800,background:'linear-gradient(135deg,#00C8FF,#6C5CE7)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text',letterSpacing:3}}>星舟加速器</div>
       <div style={{fontSize:11,color:C.gray,marginTop:6}}>v1.0.0</div>
       <div style={{fontSize:12,color:C.gray,textAlign:'center',lineHeight:1.9,marginTop:20,maxWidth:280}}>一款专业的网络加速工具，采用全球顶尖加速节点与智能路由技术，为您提供安全、稳定、极速的网络加速服务。</div>
     </div>
