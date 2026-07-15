@@ -48,10 +48,11 @@ const RocketGauge=({state,size=220}:{state:'idle'|'connecting'|'connected';size?
     <svg width={size} height={size} viewBox="0 0 240 240" fill="none" style={{filter:`drop-shadow(0 0 ${size/8}px ${glowColor}40)`,overflow:'visible'}}>
       <defs>
         <linearGradient id="noseG" x1="120" y1="38" x2="120" y2="105" gradientUnits="userSpaceOnUse"><stop stopColor="#F1F5F9"/><stop offset=".5" stopColor="#CBD5E1"/><stop offset="1" stopColor="#64748B"/></linearGradient>
-        <linearGradient id="bodyG" x1="96" y1="90" x2="144" y2="170" gradientUnits="userSpaceOnUse"><stop stopColor="#E2E8F0"/><stop offset=".5" stopColor="#94A3B8"/><stop offset="1" stopColor="#475569"/></linearGradient>
-        <linearGradient id="bodyShine" x1="100" y1="90" x2="115" y2="170" gradientUnits="userSpaceOnUse"><stop stopColor="#FFFFFF" stopOpacity=".5"/><stop offset="1" stopColor="#FFFFFF" stopOpacity="0"/></linearGradient>
-        <linearGradient id="finG" x1="80" y1="148" x2="95" y2="175" gradientUnits="userSpaceOnUse"><stop stopColor="#94A3B8"/><stop offset="1" stopColor="#334155"/></linearGradient>
-        <linearGradient id="finGR" x1="145" y1="148" x2="130" y2="175" gradientUnits="userSpaceOnUse"><stop stopColor="#94A3B8"/><stop offset="1" stopColor="#334155"/></linearGradient>
+        <linearGradient id="bodyG" x1="100" y1="50" x2="140" y2="170" gradientUnits="userSpaceOnUse"><stop stopColor="#E2E8F0"/><stop offset=".5" stopColor="#94A3B8"/><stop offset="1" stopColor="#475569"/></linearGradient>
+        <linearGradient id="bodyShine" x1="100" y1="60" x2="110" y2="170" gradientUnits="userSpaceOnUse"><stop stopColor="#FFFFFF" stopOpacity=".55"/><stop offset="1" stopColor="#FFFFFF" stopOpacity="0"/></linearGradient>
+        <linearGradient id="finG" x1="80" y1="148" x2="100" y2="178" gradientUnits="userSpaceOnUse"><stop stopColor="#94A3B8"/><stop offset="1" stopColor="#334155"/></linearGradient>
+        <linearGradient id="finGR" x1="160" y1="148" x2="140" y2="178" gradientUnits="userSpaceOnUse"><stop stopColor="#94A3B8"/><stop offset="1" stopColor="#334155"/></linearGradient>
+        <linearGradient id="tailG" x1="120" y1="174" x2="120" y2="190" gradientUnits="userSpaceOnUse"><stop stopColor="#64748B"/><stop offset="1" stopColor="#1E293B"/></linearGradient>
         <linearGradient id="flame1" x1="120" y1="165" x2="120" y2="225" gradientUnits="userSpaceOnUse"><stop stopColor="#FDE68A"/><stop offset=".3" stopColor="#F5A623"/><stop offset=".7" stopColor="#EF4444"/><stop offset="1" stopColor="transparent"/></linearGradient>
         <linearGradient id="flame2" x1="120" y1="168" x2="120" y2="210" gradientUnits="userSpaceOnUse"><stop stopColor="#FFFFFF"/><stop offset=".4" stopColor="#FDE68A"/><stop offset="1" stopColor="transparent"/></linearGradient>
         <radialGradient id="portG"><stop stopColor={C.cyan} stopOpacity="1"/><stop offset=".5" stopColor={C.cyan} stopOpacity=".4"/><stop offset="1" stopColor={C.cyan} stopOpacity="0"/></radialGradient>
@@ -74,27 +75,37 @@ const RocketGauge=({state,size=220}:{state:'idle'|'connecting'|'connected';size?
       {/* Rocket group */}
       <g style={{transform:launch?'translateY(-24px)':'translateY(0)',transition:'transform .8s cubic-bezier(.34,1.56,.64,1)'}}>
       <g style={{animation:'rocketFloat 3s ease-in-out infinite'}}>
-        {/* Fins (mint triangular, LOGO style) */}
-        <path d="M100 148 L82 178 L100 170 Z" fill="#5FEBD9" stroke="#F1F5F9" strokeWidth="1.5" strokeLinejoin="round"/>
-        <path d="M140 148 L158 178 L140 170 Z" fill="#5FEBD9" stroke="#F1F5F9" strokeWidth="1.5" strokeLinejoin="round"/>
-        {/* Rocket body - two-tone bullet shape */}
-        {/* Left half - white */}
-        <path d="M120 44 Q100 64 100 108 L100 156 Q100 170 111 174 L120 174 Z" fill="#F1F5F9"/>
-        {/* Right half - mint cyan */}
-        <path d="M120 44 Q140 64 140 108 L140 156 Q140 170 129 174 L120 174 Z" fill="#5FEBD9"/>
-        {/* Body outline */}
-        <path d="M120 44 Q100 64 100 108 L100 156 Q100 170 111 174 L129 174 Q140 170 140 156 L140 108 Q140 64 120 44 Z" fill="none" stroke="#F1F5F9" strokeWidth="1.8" strokeLinejoin="round"/>
-        {/* Center split line */}
-        <line x1="120" y1="50" x2="120" y2="172" stroke="#F1F5F9" strokeWidth="1" opacity=".55"/>
-        {/* Bottom nozzle cone */}
-        <path d="M112 174 L120 190 L128 174 Z" fill="#5FEBD9" stroke="#F1F5F9" strokeWidth="1.5" strokeLinejoin="round"/>
+        {/* Fins - metallic industrial (LOGO shape) */}
+        <path d="M100 148 L82 178 L100 170 Z" fill="url(#finG)"/>
+        <path d="M140 148 L158 178 L140 170 Z" fill="url(#finGR)"/>
+        <path d="M100 148 L82 178 L100 170 Z" fill="none" stroke="#F5A623" strokeWidth="1" opacity=".3"/>
+        <path d="M140 148 L158 178 L140 170 Z" fill="none" stroke="#F5A623" strokeWidth="1" opacity=".3"/>
+        {/* Body - metallic bullet silhouette (LOGO shape) */}
+        <path d="M120 44 Q100 64 100 108 L100 156 Q100 170 111 174 L129 174 Q140 170 140 156 L140 108 Q140 64 120 44 Z" fill="url(#bodyG)"/>
+        {/* Left side shine along inner edge */}
+        <path d="M108 56 Q102 76 102 108 L102 152 Q103 166 111 171" fill="none" stroke="url(#bodyShine)" strokeWidth="5" strokeLinecap="round"/>
+        {/* Subtle silhouette outline */}
+        <path d="M120 44 Q100 64 100 108 L100 156 Q100 170 111 174 L129 174 Q140 170 140 156 L140 108 Q140 64 120 44 Z" fill="none" stroke="#1E293B" strokeWidth="1" opacity=".5"/>
         {/* Nose tip highlight */}
-        <circle cx="120" cy="48" r="1.8" fill="#FFFFFF" opacity=".9"/>
-        {/* Porthole with cyan glow */}
-        <circle cx="120" cy="108" r="11" fill="#0a1628" stroke="#F1F5F9" strokeWidth="1.8"/>
-        <circle cx="120" cy="108" r="8" fill="url(#portG)" opacity={state==='idle'?.65:1}/>
-        <circle cx="117" cy="105" r="2" fill="#FFFFFF" opacity=".85"/>
-        <circle cx="122" cy="110" r=".8" fill={C.cyan}/>
+        <circle cx="120" cy="48" r="2" fill="#FFFFFF" opacity=".85"/>
+        {/* Bottom tail cone - dark metallic (LOGO shape) */}
+        <path d="M112 174 L120 190 L128 174 Z" fill="url(#tailG)" stroke="#1E293B" strokeWidth="1"/>
+        {/* Bottom engine ring */}
+        <ellipse cx="120" cy="173" rx="20" ry="3" fill="#1E293B"/>
+        <ellipse cx="120" cy="172" rx="18" ry="2.2" fill="#0F172A"/>
+        {/* Porthole - metallic style */}
+        <circle cx="120" cy="108" r="11" fill="#0a1628" stroke="#475569" strokeWidth="2"/>
+        <circle cx="120" cy="108" r="9" fill="url(#portG)" opacity={state==='idle'?.6:1}/>
+        <circle cx="117" cy="105" r="2.5" fill="#FFFFFF" opacity=".7"/>
+        <circle cx="123" cy="111" r="1" fill={C.cyan}/>
+        {/* Body decorative stripes */}
+        <rect x="100" y="140" width="40" height="1.5" fill={C.cyan} opacity=".6"/>
+        <rect x="100" y="146" width="40" height="3" fill="#F5A623" opacity=".3"/>
+        <rect x="100" y="151" width="40" height="1" fill={C.red} opacity=".4"/>
+        {/* Body rivets */}
+        {[95,125,158].map((y,i)=><g key={i}><circle cx="105" cy={y} r="1" fill="#334155"/><circle cx="135" cy={y} r="1" fill="#334155"/></g>)}
+        {/* STARSHIP text on body */}
+        <text x="120" y="128" textAnchor="middle" fontSize="5" fill="#334155" fontWeight="700" letterSpacing=".5">STARSHIP</text>
         {/* Flame */}
         {showFlame&&<g style={{animation:'flameFlicker .3s ease-in-out infinite',transformOrigin:'120px 190px'}}>
           <ellipse cx="120" cy="216" rx="18" ry="30" fill="url(#flame1)" opacity=".7"/>
