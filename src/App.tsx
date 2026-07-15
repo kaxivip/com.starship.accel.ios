@@ -133,39 +133,9 @@ function describeArc(cx:number,cy:number,r:number,startAngle:number,endAngle:num
 
 const Ico=({d,s=20,c=C.gray}:{d:string;s?:number;c?:string})=><svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={d}/></svg>;
 
-const BrandLogo=({size=64,glow=false}:{size?:number;glow?:boolean})=>{
-  const uid=`bl${size}`;
-  return <svg width={size} height={size} viewBox="0 0 100 100" style={glow?{filter:`drop-shadow(0 0 12px rgba(0,200,255,.35)) drop-shadow(0 0 20px rgba(108,92,231,.25))`}:undefined}>
-    <defs>
-      <linearGradient id={`${uid}a`} x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stopColor="#1e2540"/>
-        <stop offset="1" stopColor="#0a1024"/>
-      </linearGradient>
-      <linearGradient id={`${uid}o`} x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stopColor="#6C5CE7"/>
-        <stop offset=".5" stopColor="#8B7EF0"/>
-        <stop offset="1" stopColor="#00C8FF"/>
-      </linearGradient>
-      <linearGradient id={`${uid}r`} x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stopColor="#F1F5F9"/>
-        <stop offset=".6" stopColor="#CBD5E1"/>
-        <stop offset="1" stopColor="#64748B"/>
-      </linearGradient>
-      <linearGradient id={`${uid}f`} x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stopColor="#F5A623"/>
-        <stop offset="1" stopColor="#EF4444" stopOpacity="0"/>
-      </linearGradient>
-    </defs>
-    <path d="M50 8 L14 92 L27 92 L35 72 L65 72 L73 92 L86 92 Z M40 62 L50 38 L60 62 Z" fill={`url(#${uid}a)`} fillRule="evenodd"/>
-    <ellipse cx="50" cy="54" rx="46" ry="13" fill="none" stroke={`url(#${uid}o)`} strokeWidth="4" strokeLinecap="round" transform="rotate(-16 50 54)" opacity=".95"/>
-    <path d="M50 28 L44 50 L44 66 L56 66 L56 50 Z" fill={`url(#${uid}r)`}/>
-    <circle cx="50" cy="46" r="3.4" fill="#0a1024"/>
-    <circle cx="50" cy="46" r="3.4" fill="none" stroke="#00C8FF" strokeWidth=".8" opacity=".6"/>
-    <path d="M44 60 L36 70 L44 66 Z" fill="#6C5CE7"/>
-    <path d="M56 60 L64 70 L56 66 Z" fill="#6C5CE7"/>
-    <path d="M46 66 L50 78 L54 66 Z" fill={`url(#${uid}f)`}/>
-  </svg>;
-};
+const BrandLogo=({size=64,glow=false}:{size?:number;glow?:boolean})=>(
+  <img src="/logo.png" alt="星舟加速器" width={size} height={size} style={{width:size,height:size,objectFit:'contain',display:'block',filter:glow?'drop-shadow(0 0 14px rgba(0,200,255,.45)) drop-shadow(0 0 24px rgba(108,92,231,.3))':undefined,mixBlendMode:'screen'}}/>
+);
 const IC={
   bolt:'M13 2L3 14h9l-1 10 10-12h-9l1-10z',
   crown:'M2 17l3-9 5 4 2-8 2 8 5-4 3 9H2z',
